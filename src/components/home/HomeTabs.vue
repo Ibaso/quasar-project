@@ -9,7 +9,7 @@
               <label class="text-white cursor-pointer">Home</label>
             </q-toolbar-title>
 
-            <div> <q-icon name="logout" size="sm" class="cursor-pointer" @click="logOut" /> </div>
+            <div> <q-icon name="logout" size="sm" class="cursor-pointer" @click="logout" /> </div>
           </q-toolbar>
 
 
@@ -24,6 +24,8 @@
 <script>
     import HomePageComponent from "components/home/HomePageComponent";
     import ViewPostComponent from "components/home/ViewPostComponent";
+    import {apiUrls} from "src/utils/const/apiUrls";
+    import {mapGetters} from "vuex";
     export default {
         name: "HomeTabs",
       components: {ViewPostComponent, HomePageComponent},
@@ -34,6 +36,7 @@
           }
       },
       methods:{
+        ...mapGetters(['getUser']),
         changeToView(id){
           console.log("id", id)
           this.id = id
@@ -41,6 +44,14 @@
         },
         changeToHome(){
           this.tab = "home"
+        },
+        logout(){
+          this.$axios.put(apiUrls.auth + '/logout',{
+            username : this.getUser().id,
+            token : " "
+          }).then(
+            window.location = '/'
+          )
         }
       }
     }
