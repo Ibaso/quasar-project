@@ -17,7 +17,7 @@
                 <b>
                 {{item.screen_name}}
                 </b>
-                {{item.username}}
+                @{{item.username}}
 
               </profile-view-component>
 
@@ -41,7 +41,7 @@
             </q-btn>
           </div>
           <div align="left" v-if="item.parent_id !=-1">
-            <label class="text-blue">Replying to</label> {{item.parent_username}}
+            <label class="text-blue">Replying to</label> @{{item.parent_username}}
           </div>
         </div>
         <div align="left">{{item.content}}</div>
